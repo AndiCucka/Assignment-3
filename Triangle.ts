@@ -8,50 +8,50 @@
 
 export default class Triangle {
   // variables
-  private sideA: number
-  private sideB: number
-  private sideC: number
+  private sideAValue: number
+  private sideBValue: number
+  private sideCValue: number
 
   /*
   * Constructor.
   */
   constructor(side1: number, side2: number, side3: number) {
-    this.sideA = side1
-    this.sideB = side2
-    this.sideC = side3
+    this.sideAValue = side1
+    this.sideBValue = side2
+    this.sideCValue = side3
   }
 
   /*
   * Getter for sideA
   */
   public get sideA() {
-    return this.sideA
+    return this.sideAValue
   }
 
   /*
   * Getter for sideB
   */
   public get sideB() {
-    return this.sideB
+    return this.sideBValue
   }
 
   /*
   * Getter for sideC
   */
   public get sideC() {
-    return this.sideC
+    return this.sideCValue
   }
 
   /*
   * Checks if the triangle has valid dimensions
   */
   public isValid(): boolean {
-  let isValid: boolean = true
-    if ((this.sideA + this.sideB) < this.sideC) {
+    let isValid: boolean = true
+    if ((this.sideAValue + this.sideBValue) < this.sideCValue) {
       isValid = false
-    } else if ((this.sideB + this.sideC) < this.sideA) {
+    } else if ((this.sideBValue + this.sideCValue) < this.sideAValue) {
       isValid = false
-    } else if ((this.sideC + this.sideA) < this.sideB) {
+    } else if ((this.sideCValue + this.sideAValue) < this.sideBValue) {
       isValid = false
     }
     return isValid
@@ -65,9 +65,9 @@ export default class Triangle {
       return -1
     } else {
       return Math.sqrt(this.semiPerimeter()
-        * (this.semiPerimeter() - this.sideA)
-        * (this.semiPerimeter() - this.sideB)
-        * (this.semiPerimeter() - this.sideC)
+        * (this.semiPerimeter() - this.sideAValue)
+        * (this.semiPerimeter() - this.sideBValue)
+        * (this.semiPerimeter() - this.sideCValue)
       )
     }
   }
@@ -77,13 +77,13 @@ export default class Triangle {
   */
   public getType(): string {
     if (this.isValid() === false) {
-      return -1
+      return "Invalid Triangle"
     } else {
       let triangleType: string
       if (
-        this.sideA === this.sideB &&
-        this.sideB === this.sideC &&
-        this.sideC === this.sideA
+        this.sideAValue === this.sideBValue &&
+        this.sideBValue === this.sideCValue &&
+        this.sideCValue === this.sideAValue
       ) {
         triangleType = "Equilateral triangle"
       } else if (
@@ -93,12 +93,12 @@ export default class Triangle {
       ) {
         triangleType = "Right angle triangle"
       } else if (
-        this.sideA === this.sideB ||
-        this.sideB === this.sideC ||
-        this.sideC === this.sideA
+        this.sideAValue === this.sideBValue ||
+        this.sideBValue === this.sideCValue ||
+        this.sideCValue === this.sideAValue
       ) {
         triangleType = "Isosceles triangle"
-      } else if (this.sideA != this.sideB != this.sideC) {
+      } else {
         triangleType = "Scalene triangle"
       }
       return triangleType
@@ -112,7 +112,7 @@ export default class Triangle {
     if (this.isValid() === false) {
       return -1
     } else {
-      return (this.sideA + this.sideB + this.sideC) / 2
+      return (this.sideAValue + this.sideBValue + this.sideCValue) / 2
     }
   }
 
@@ -126,18 +126,18 @@ export default class Triangle {
       let angle: number
       if (angleNumber === 1) {
         angle = Math.acos(
-          ((this.sideB ** 2) + (this.sideC ** 2) - (this.sideA ** 2))
-          / (2 * this.sideB * this.sideC)
+          ((this.sideBValue ** 2) + (this.sideCValue ** 2) - (this.sideAValue ** 2))
+          / (2 * this.sideBValue * this.sideCValue)
         )
       } else if (angleNumber === 2) {
         angle = Math.acos(
-          ((this.sideC ** 2) + (this.sideA ** 2) - (this.sideB ** 2))
-          / (2 * this.sideC * this.sideA)
+          ((this.sideCValue ** 2) + (this.sideAValue ** 2) - (this.sideBValue ** 2))
+          / (2 * this.sideCValue * this.sideAValue)
         )
-      } else if (angleNumber === 3) {
+      } else {
         angle = Math.acos(
-          ((this.sideA ** 2) + (this.sideB ** 2) - (this.sideC ** 2))
-          / (2 * this.sideA * this.sideB)
+          ((this.sideAValue ** 2) + (this.sideBValue ** 2) - (this.sideCValue ** 2))
+          / (2 * this.sideAValue * this.sideBValue)
         )
       }
       return angle
@@ -153,11 +153,11 @@ export default class Triangle {
     } else {
       let height: number
       if (sideNumber === 1) {
-        height = 2 * this.area() / this.sideA
+        height = 2 * this.area() / this.sideAValue
       } else if (sideNumber === 2) {
-        height = 2 * this.area() / this.sideB
-      } else if (sideNumber === 3) {
-        height = 2 * this.area() / this.sideC
+        height = 2 * this.area() / this.sideBValue
+      } else {
+        height = 2 * this.area() / this.sideCValue
       }
       return height
     }
@@ -181,7 +181,7 @@ export default class Triangle {
     if (this.isValid() === false) {
       return -1
     } else {
-      return (this.sideA * this.sideB * this.sideC) / (4 * this.area())
+      return (this.sideAValue * this.sideBValue * this.sideCValue) / (4 * this.area())
     }
   }
 }
